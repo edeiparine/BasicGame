@@ -1,0 +1,29 @@
+public abstract class Entity {
+	public int x;
+	public int y;
+	public int r;
+
+	public int dx;
+	public int dy;
+
+	public int getx() {
+		return x;
+	}
+
+	public void setx() {
+		this.x = x;
+	}
+
+	public int gety() {
+		return y;
+	}
+	
+	public void sety() {
+		this.y = y;
+	}
+
+	public int getr() {
+		return r;
+	}
+
+}

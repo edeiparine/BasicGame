@@ -1,0 +1,41 @@
+import java.awt.Color;
+import java.awt.Graphics2D;
+
+public class Bullet extends Entity {
+	double x;
+	double y;
+	int r;
+
+	double dx;
+	double dy;
+	double rad;
+	double speed;
+
+	public Color color1;
+
+	public Bullet(double angle, double x, double y) {
+		this.x = x;
+		this.y = y;
+		r = 2;
+
+		rad = Math.toRadians(angle);
+		dx = Math.cos(rad);
+		dy = Math.sin(rad);
+
+		speed = 15;
+		color1 = Color.YELLOW;
+	}
+
+	public void update() {
+		// TODO Auto-generated method stub
+
+		x += dx;
+		y += dy;
+	}
+
+	public void draw(Graphics2D g) {
+		// TODO Auto-generated method stub
+		super.draw(g);
+	}
+
+}

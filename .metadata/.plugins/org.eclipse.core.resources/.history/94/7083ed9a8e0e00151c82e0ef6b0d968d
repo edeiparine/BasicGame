@@ -1,0 +1,12 @@
+
+public abstract class Entity {
+	public int x;
+	public int y;
+	public int r;
+	
+	public int dx;
+	public int dy;
+	
+	
+	
+}

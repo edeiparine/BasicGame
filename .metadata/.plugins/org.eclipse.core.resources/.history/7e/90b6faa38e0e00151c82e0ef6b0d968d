@@ -1,0 +1,18 @@
+
+public abstract class Entity {
+	public int x;
+	public int y;
+	public int r;
+	
+	public int dx;
+	public int dy;
+	
+	public int getx() {
+		getx();
+	}
+	
+	public int gety() {
+		return y;
+	}
+	
+}

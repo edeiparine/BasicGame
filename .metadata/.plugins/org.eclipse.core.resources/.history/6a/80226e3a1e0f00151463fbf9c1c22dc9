@@ -1,0 +1,15 @@
+
+public class Bullet {
+	double x;
+	double y;
+	int r;
+	
+	double dx;
+	double dy;
+	double rad;
+	double speed;
+	
+	public Bullet(double angle, double x, double y) {
+		
+	}
+}

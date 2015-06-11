@@ -1,0 +1,13 @@
+import java.awt.Graphics2D;
+
+public abstract class Entity {
+
+	public void update() {
+
+	}
+
+	public void draw(Graphics2D g) {
+
+	}
+
+}
