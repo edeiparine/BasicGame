@@ -1,0 +1,13 @@
+
+public class PowerUp {
+	private double x;
+	private double y;
+	private int r;
+	
+	
+	private int type;
+	
+	public PowerUp() {
+		
+	}
+}

@@ -21,9 +21,14 @@ public class Player extends Entity {
 	private long firingTimer;
 	private long firingDelay;
 
+	private boolean recovering;
+	private long recoveryTimer;
+
 	int lives;
 	private Color color1;
 	private Color color2;
+
+	private int score;
 
 	public Player() {
 		x = GamePanel.WIDTH / 2;
@@ -40,6 +45,29 @@ public class Player extends Entity {
 		firingTimer = System.nanoTime();
 		firingDelay = 200;
 		firing = true;
+
+		recovering = false;
+		recoveryTimer = 0;
+
+		score = 0;
+	}
+
+	public int getLives() {
+		return lives;
+	}
+
+	public void setLives(int lives) {
+		this.lives = lives;
+	}
+
+	public boolean isRecovering() {
+		return recovering;
+	}
+
+	public void loseLife() {
+		lives--;
+		recovering = true;
+		recoveryTimer = System.nanoTime();
 	}
 
 	public void update() {
@@ -82,17 +110,35 @@ public class Player extends Entity {
 				firingTimer = System.nanoTime();
 			}
 		}
+
+		long elapsed = (System.nanoTime() - recoveryTimer) / 1000000;
+		if (elapsed > 2000) {
+			recovering = false;
+			recoveryTimer = 0;
+		}
 	}
 
 	public void draw(Graphics2D g) {
 		// TODO Auto-generated method stub
-		g.setColor(color1);
-		g.fillOval(x - r, y - r, 2 * r, 2 * r);
 
-		g.setStroke(new BasicStroke(3));
-		g.setColor(color1.darker());
-		g.fillOval(x - r, y - r, 2 * r, 2 * r);
-		g.setStroke(new BasicStroke(1));
+		if (recovering) {
+			g.setColor(color2);
+			g.fillOval(x - r, y - r, 2 * r, 2 * r);
+
+			g.setStroke(new BasicStroke(3));
+			g.setColor(color2.darker());
+			g.fillOval(x - r, y - r, 2 * r, 2 * r);
+			g.setStroke(new BasicStroke(1));
+		} else {
+			g.setColor(color1);
+			g.fillOval(x - r, y - r, 2 * r, 2 * r);
+
+			g.setStroke(new BasicStroke(3));
+			g.setColor(color1.darker());
+			g.fillOval(x - r, y - r, 2 * r, 2 * r);
+			g.setStroke(new BasicStroke(1));
+		}
+
 	}
 
 	public boolean isLeft() {
@@ -135,4 +181,39 @@ public class Player extends Entity {
 		this.firing = firing;
 	}
 
+	public void addScore(int i) {
+		score += i;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getR() {
+		return r;
+	}
+
+	public void setR(int r) {
+		this.r = r;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
 }

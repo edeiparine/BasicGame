@@ -98,6 +98,14 @@ public class Enemy {
 		return dead;
 	}
 
+	public int getTyper() {
+		return type;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
 	public void update() {
 		x += dx;
 		y += dy;
