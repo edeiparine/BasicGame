@@ -188,7 +188,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 				} else if (rand < 0.020) {
 					powerUps.add(new PowerUp(3, e.getX(), e.getY()));
 				} else if (rand < 0.120) {
-					powerUps.add(new PowerUp(2, getX(), e.getY()));
+					powerUps.add(new PowerUp(2, e.getX(), e.getY()));
+				} else {
+					powerUps.add(new PowerUp(2, e.getX(), e.getY()));
 				}
 
 				player.addScore(e.getTyper() + e.getRank());
@@ -215,6 +217,39 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 				if (dist < pr + er) {
 					player.loseLife();
 				}
+			}
+		}
+
+		int px = player.getX();
+		int py = player.getY();
+		int pr = player.getR();
+
+		for (int i = 0; i < powerUps.size(); i++) {
+			PowerUp p = powerUps.get(i);
+			double x = p.getX();
+			double y = p.getY();
+			double r = p.getR();
+
+			double dx = px - x;
+			double dy = py - y;
+			double dist = Math.sqrt(dx * dx * +dy * dy);
+
+			if (dist < pr + r) {
+				int type = p.getType();
+
+				if (type == 1) {
+					player.gainLife();
+				}
+
+				if (type == 2) {
+					player.increasePower(1);
+				}
+
+				if (type == 3) {
+					player.increasePower(2);
+				}
+				powerUps.remove(i);
+				i--;
 			}
 		}
 	}
@@ -263,6 +298,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			g.setStroke(new BasicStroke(1));
 		}
 
+		g.setColor(Color.YELLOW);
+		g.fillRect(20, 40, player.getPower() * 8, 8);
+		g.setColor(Color.YELLOW.darker());
+		g.setStroke(new BasicStroke(2));
+		for (int i = 0; i < player.getRequiredPower(); i++) {
+			g.drawRect(20 + 8 * i, 40, 8, 8);
+		}
+
+		g.setStroke(new BasicStroke(1));
+
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		g.drawString("Score: " + player.getScore(), WIDTH - 100, 30);
@@ -290,6 +335,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		if (waveNumber == 2) {
 			for (int i = 0; i < 8; i++) {
 				enemies.add(new Enemy(1, 1));
+			}
+		}
+
+		if (waveNumber == 3) {
+			for (int i = 0; i < 4; i++) {
+				enemies.add(new Enemy(2, 1));
+			}
+
+			for (int i = 0; i < 4; i++) {
+				enemies.add(new Enemy(3, 1));
 			}
 		}
 	}

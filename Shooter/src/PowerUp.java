@@ -16,9 +16,8 @@ public class PowerUp {
 		this.y = y;
 
 		if (type == 1) {
-			color1 = Color.PINK;
-			r = 3;
-
+			color1 = Color.YELLOW;
+			r = 2;
 		}
 		if (type == 2) {
 			color1 = Color.YELLOW;

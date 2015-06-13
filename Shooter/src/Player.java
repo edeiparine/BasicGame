@@ -30,6 +30,10 @@ public class Player extends Entity {
 
 	private int score;
 
+	private int powerLevel;
+	private int power;
+	private int[] requiredPower = { 1, 2, 3, 4, 5 };
+
 	public Player() {
 		x = GamePanel.WIDTH / 2;
 		y = GamePanel.HEIGHT / 2;
@@ -64,10 +68,34 @@ public class Player extends Entity {
 		return recovering;
 	}
 
+	public void gainLife() {
+		lives++;
+	}
+
 	public void loseLife() {
 		lives--;
 		recovering = true;
 		recoveryTimer = System.nanoTime();
+	}
+
+	public void increasePower(int i) {
+		power += i;
+		if (power >= requiredPower[powerLevel]) {
+			power -= requiredPower[powerLevel];
+			powerLevel++;
+		}
+	}
+
+	public int getPowerLevel() {
+		return powerLevel;
+	}
+
+	public int getPower() {
+		return power;
+	}
+
+	public int getRequiredPower() {
+		return requiredPower[powerLevel];
 	}
 
 	public void update() {
@@ -104,11 +132,23 @@ public class Player extends Entity {
 		dy = 0;
 
 		if (firing) {
-			long elapse = (System.nanoTime() - firingTimer) / 1000000;
-			if (elapse > firingDelay) {
-				GamePanel.bullets.add(new Bullet(270, x, y));
+
+			long elapsed = (System.nanoTime() - firingTimer) / 1000000;
+			if (elapsed > firingDelay) {
 				firingTimer = System.nanoTime();
+				if (powerLevel < 2) {
+					GamePanel.bullets.add(new Bullet(270, x, y));
+				} else if (powerLevel < 4) {
+					GamePanel.bullets.add(new Bullet(270, x + 5, y));
+					GamePanel.bullets.add(new Bullet(270, x - 5, y));
+				} else {
+					GamePanel.bullets.add(new Bullet(270, x, y));
+					GamePanel.bullets.add(new Bullet(275, x + 5, y));
+					GamePanel.bullets.add(new Bullet(265, x - 5, y));
+				}
 			}
+			
+			System.out.println(getPower());
 		}
 
 		long elapsed = (System.nanoTime() - recoveryTimer) / 1000000;
