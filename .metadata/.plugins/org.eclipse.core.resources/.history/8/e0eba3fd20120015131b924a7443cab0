@@ -133,9 +133,6 @@ public class Enemy {
 		if (health <= 0) {
 			dead = true;
 		}
-		
-		hit = true;
-		hitTimer = System.nanoTime();
 	}
 
 	public void explode() {
@@ -196,7 +193,7 @@ public class Enemy {
 		
 		if(hit) {
 			long elapsed = (System.nanoTime() - hitTimer) / 1000000;
-			if(elapsed > 50) {
+			if(elapsed > hitTimer) {
 				hit = false;
 				hitTimer = 0;	
 			}
@@ -204,15 +201,6 @@ public class Enemy {
 	}
 
 	public void draw(Graphics2D g) {
-		if(hit) {
-		g.setColor(Color.WHITE);
-		g.fillOval((int) (x - r), (int) (y - r), 2 * r, 2 * r);
-
-		g.setStroke(new BasicStroke(3));
-		g.setColor(Color.WHITE.darker());
-		g.drawOval((int) (x - r), (int) (y - r), 2 * r, 2 * r);
-		g.setStroke(new BasicStroke(3));
-	} else {
 		g.setColor(color1);
 		g.fillOval((int) (x - r), (int) (y - r), 2 * r, 2 * r);
 
@@ -220,5 +208,5 @@ public class Enemy {
 		g.drawOval((int) (x - r), (int) (y - r), 2 * r, 2 * r);
 		g.setStroke(new BasicStroke(3));
 	}
-	}
+
 }
