@@ -35,7 +35,7 @@ public class Enemy {
 
 			if (rank == 2) {
 				speed = 2;
-				r = 10;
+				r = 0;
 				health = 2;
 			}
 			if (rank == 3) {
@@ -128,27 +128,16 @@ public class Enemy {
 			dead = true;
 		}
 	}
-
+	
 	public void explode() {
-		if (rank > 1) {
+		if(rank > 1) {
 			int amount = 0;
-			if (type == 1) {
+			if( type == 1) {
 				amount = 3;
 			}
-
-			for (int i = 0; i < amount; i++) {
-				Enemy e = new Enemy(getType(), getRank() - 1);
-				e.x = this.x;
-				e.y = this.y;
-				double angle = 0;
-
-				if (!ready) {
-					angle = Math.random() * 140 + 20;
-				} else {
-					angle = Math.random() * 360;
-				}
-				e.rad = Math.toRadians(angle);
-				GamePanel.enemies.add(e);
+			
+			for( int i = 0 ; i < i < amount; i++) {
+				Enemy e = Enemy(getType(), getRank() -1);
 			}
 		}
 	}

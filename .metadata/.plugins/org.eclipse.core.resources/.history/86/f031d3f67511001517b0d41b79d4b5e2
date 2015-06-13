@@ -32,25 +32,8 @@ public class Enemy {
 				r = 5;
 				health = 1;
 			}
-
-			if (rank == 2) {
-				speed = 2;
-				r = 10;
-				health = 2;
-			}
-			if (rank == 3) {
-				speed = 1.5;
-				r = 20;
-				health = 3;
-			}
-
-			if (rank == 4) {
-				speed = 1.5;
-				r = 30;
-				health = 4;
-			}
 		}
-
+		
 		if (type == 2) {
 			color1 = Color.RED;
 			if (rank == 1) {
@@ -59,7 +42,7 @@ public class Enemy {
 				health = 2;
 			}
 		}
-
+		
 		if (type == 3) {
 			color1 = Color.GREEN;
 			if (rank == 1) {
@@ -129,35 +112,11 @@ public class Enemy {
 		}
 	}
 
-	public void explode() {
-		if (rank > 1) {
-			int amount = 0;
-			if (type == 1) {
-				amount = 3;
-			}
-
-			for (int i = 0; i < amount; i++) {
-				Enemy e = new Enemy(getType(), getRank() - 1);
-				e.x = this.x;
-				e.y = this.y;
-				double angle = 0;
-
-				if (!ready) {
-					angle = Math.random() * 140 + 20;
-				} else {
-					angle = Math.random() * 360;
-				}
-				e.rad = Math.toRadians(angle);
-				GamePanel.enemies.add(e);
-			}
-		}
-	}
-
 	public boolean isDead() {
 		return dead;
 	}
 
-	public int getType() {
+	public int getTyper() {
 		return type;
 	}
 
