@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="waveN" key="selection"/>
+		<item value="hit" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="hit"/>
+			<item value="long"/>
+			<item value="recov"/>
+			<item value="timer"/>
 			<item value="waveN"/>
 			<item value="wave"/>
 			<item value="rand &lt;"/>
 			<item value="int i  = "/>
-			<item value="hit"/>
-			<item value="waveNUmber"/>
-			<item value="power"/>
-			<item value="powerLev"/>
 		</list>
 		<list key="replacehistory">
 		</list>

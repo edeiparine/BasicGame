@@ -24,6 +24,8 @@ public class Enemy {
 	private boolean hit;
 	private long hitTimer;
 
+	private boolean slow;
+
 	public Enemy(int type, int rank) {
 		this.type = type;
 		this.rank = rank;
@@ -31,7 +33,7 @@ public class Enemy {
 		if (type == 1) {
 			color1 = Color.BLUE;
 			if (rank == 1) {
-				speed = 2;
+				speed = 1;
 				r = 5;
 				health = 1;
 			}
@@ -87,7 +89,7 @@ public class Enemy {
 		hit = false;
 		hitTimer = 0;
 	}
-	
+
 	public double getX() {
 		return x;
 	}
@@ -133,7 +135,7 @@ public class Enemy {
 		if (health <= 0) {
 			dead = true;
 		}
-		
+
 		hit = true;
 		hitTimer = System.nanoTime();
 	}
@@ -174,7 +176,19 @@ public class Enemy {
 		return rank;
 	}
 
+	public void setSlow(boolean b) {
+		this.slow = b;
+	}
+
 	public void update() {
+
+		if (slow) {
+			x += dx * 0.3;
+			y += dy * 0.3;
+		} else {
+			x += dx;
+			y += dy;
+		}
 		x += dx;
 		y += dy;
 
@@ -193,32 +207,32 @@ public class Enemy {
 			dx = -dx;
 		if (y > GamePanel.HEIGHT - r && dy > 0)
 			dy = -dy;
-		
-		if(hit) {
+
+		if (hit) {
 			long elapsed = (System.nanoTime() - hitTimer) / 1000000;
-			if(elapsed > 50) {
+			if (elapsed > 50) {
 				hit = false;
-				hitTimer = 0;	
+				hitTimer = 0;
 			}
 		}
 	}
 
 	public void draw(Graphics2D g) {
-		if(hit) {
-		g.setColor(Color.WHITE);
-		g.fillOval((int) (x - r), (int) (y - r), 2 * r, 2 * r);
+		if (hit) {
+			g.setColor(Color.WHITE);
+			g.fillOval((int) (x - r), (int) (y - r), 2 * r, 2 * r);
 
-		g.setStroke(new BasicStroke(3));
-		g.setColor(Color.WHITE.darker());
-		g.drawOval((int) (x - r), (int) (y - r), 2 * r, 2 * r);
-		g.setStroke(new BasicStroke(3));
-	} else {
-		g.setColor(color1);
-		g.fillOval((int) (x - r), (int) (y - r), 2 * r, 2 * r);
+			g.setStroke(new BasicStroke(3));
+			g.setColor(Color.WHITE.darker());
+			g.drawOval((int) (x - r), (int) (y - r), 2 * r, 2 * r);
+			g.setStroke(new BasicStroke(3));
+		} else {
+			g.setColor(color1);
+			g.fillOval((int) (x - r), (int) (y - r), 2 * r, 2 * r);
 
-		g.setStroke(new BasicStroke(3));
-		g.drawOval((int) (x - r), (int) (y - r), 2 * r, 2 * r);
-		g.setStroke(new BasicStroke(3));
-	}
+			g.setStroke(new BasicStroke(3));
+			g.drawOval((int) (x - r), (int) (y - r), 2 * r, 2 * r);
+			g.setStroke(new BasicStroke(3));
+		}
 	}
 }

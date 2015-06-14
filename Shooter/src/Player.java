@@ -32,7 +32,7 @@ public class Player extends Entity {
 
 	private int powerLevel;
 	private int power;
-	private int[] requiredPower = { 1, 2, 3, 4, 5 };
+	private int[] requiredPower = { 1, 2, 3, 4, 5, 6 };
 
 	public Player() {
 		x = GamePanel.WIDTH / 2;
@@ -132,7 +132,6 @@ public class Player extends Entity {
 		dy = 0;
 
 		if (firing) {
-
 			long elapsed = (System.nanoTime() - firingTimer) / 1000000;
 			if (elapsed > firingDelay) {
 				firingTimer = System.nanoTime();
@@ -147,7 +146,7 @@ public class Player extends Entity {
 					GamePanel.bullets.add(new Bullet(265, x - 5, y));
 				}
 			}
-			
+
 			System.out.println(getPower());
 		}
 

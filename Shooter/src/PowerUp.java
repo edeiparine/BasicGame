@@ -28,6 +28,12 @@ public class PowerUp {
 			color1 = Color.YELLOW;
 			r = 5;
 		}
+
+		if (type == 4) {
+			color1 = Color.WHITE;
+			r = 3;
+		}
+
 	}
 
 	public double getX() {

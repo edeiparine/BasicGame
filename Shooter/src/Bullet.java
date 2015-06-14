@@ -31,7 +31,6 @@ public class Bullet {
 
 	public boolean update() {
 		// TODO Auto-generated method stub
-
 		x += dx;
 		y += dy;
 
@@ -69,7 +68,5 @@ public class Bullet {
 	public void setR(int r) {
 		this.r = r;
 	}
-	
-	
 
 }
